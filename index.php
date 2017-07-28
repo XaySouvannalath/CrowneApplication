@@ -18,7 +18,7 @@ $result = mysqli_query($connect, $query);
             <br />  
             <div class="table-responsive">  
                 <div align="right">  
-                    <button type="button" name="add" id="add" data-toggle="modal" data-target="#add_data_Modal" class="btn btn-warning">Add</button>  
+                    <button type="button" name="add" id="add" data-toggle="modal" data-target="#add_data_Modal" class="btn btn-warning">Add </button>  
                 </div>  
                 <br />  
                 <div id="employee_table">  
@@ -79,13 +79,6 @@ $result = mysqli_query($connect, $query);
                     <select name="gender" id="gender" class="form-control">  
                         <option value="Male">Male</option>  
                         <option value="Female">Female</option>  
-                        <option value="Female">Female</option> 
-                        <option value="Female">Female</option> 
-                        <option value="Female">Female</option> 
-                        <option value="Female">Female</option> 
-                        <option value="Female">Female</option> 
-                        <option value="Female">Female</option> 
-                        <option value="Female">Female</option> 
                     </select>  
                     <br />  
                     <label>Enter Designation</label>  
@@ -106,11 +99,13 @@ $result = mysqli_query($connect, $query);
 </div>  
 <script>
     $(document).ready(function () {
+        //on click event of add button 
         $('#add').click(function () {
             $('#insert').val("Insert");
             $('#insert_form')[0].reset();
         });
-        $(document).on('click', '.edit_data', function () {
+        
+         $(document).on('click', '.edit_data', function () {
             var employee_id = $(this).attr("id");
             $.ajax({
                 url: "fetch.php",
