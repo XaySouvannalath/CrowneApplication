@@ -80,13 +80,6 @@
                           <select name="gender" id="gender" class="form-control">  
                                <option value="Male">Male</option>  
                                <option value="Female">Female</option>  
-                               <option value="Female">Female</option> 
-                               <option value="Female">Female</option> 
-                               <option value="Female">Female</option> 
-                               <option value="Female">Female</option> 
-                               <option value="Female">Female</option> 
-                               <option value="Female">Female</option> 
-                               <option value="Female">Female</option> 
                           </select>  
                           <br />  
                           <label>Enter Designation</label>  
