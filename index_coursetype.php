@@ -40,6 +40,7 @@ myDatabase();
                 <br />
                 <div align="right">
                     <button type="button" name="add" id="add" class="btn btn-info">Add</button>
+                    <a class="btn btn-info" href="index.php">Home</a>
                 </div>
                 <br />
                 <div id="alert_message"></div>
