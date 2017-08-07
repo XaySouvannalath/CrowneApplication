@@ -1,6 +1,6 @@
 <?php
 
-$connect = mysqli_connect("localhost", "root", "", "nbs");
+include 'db.php';
 if (isset($_POST["DepartmentID"], $_POST["DepartmentName"])) {
     $DepartmentID = mysqli_real_escape_string($connect, $_POST["DepartmentID"]);
     $DepartmentName = mysqli_real_escape_string($connect, $_POST["DepartmentName"]);

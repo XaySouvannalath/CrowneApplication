@@ -1,6 +1,6 @@
 <?php
 
-$connect = mysqli_connect("localhost", "root", "", "nbs");
+include 'db.php';
 if (isset($_POST["BandingID"], $_POST["BandingNo"], $_POST["BandingDescription"])) {
     $BandingID = mysqli_real_escape_string($connect, $_POST["BandingID"]);
     $BandingNo = mysqli_real_escape_string($connect, $_POST["BandingNo"]);

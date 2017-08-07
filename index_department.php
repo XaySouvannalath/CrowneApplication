@@ -12,56 +12,57 @@ echo getAutoID("DepartmentID", "tb_department", "DEP", -3);
         <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
-        <style>
-            body
-            {
-                margin:0;
-                padding:0;
-                background-color:#f1f1f1;
-            }
-            .box
-            {
-                width:1270px;
-                padding:20px;
-                background-color:#fff;
-                border:1px solid #ccc;
-                border-radius:5px;
-                margin-top:25px;
-                box-sizing:border-box;
-            }
-        </style>
-    </head>
-   <body>
-        <div class="container box">
-            <h1 align="center">Live Add Edit Delete Datatables Records of Department</h1>
+    <scrip src="https://cdn.datatables.net/responsive/2.1.1/css/responsive.dataTables.min.css"></scrip> 
+    <style>
+        body
+        {
+            margin:0;
+            padding:0;
+            background-color:#f1f1f1;
+        }
+        .box
+        {
+            width:1270px;
+            padding:20px;
+            background-color:#fff;
+            border:1px solid #ccc;
+            border-radius:5px;
+            margin-top:25px;
+            box-sizing:border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="container box">
+        <h1 align="center">Live Add Edit Delete Datatables Records of Department</h1>
+        <br />
+        <div class="table-responsive">
             <br />
-            <div class="table-responsive">
-                <br />
-                <div align="right">
-                    <button type="button" name="add" id="add" class="btn btn-info">Add</button>
-                </div>
-                <br />
-                <div id="alert_message"></div>
-                <table id="user_data" class="table table-bordered table-striped table-responsive">
-                    <thead>
-                        <tr>
-                            <th>Department ID.</th>
-                            <th>Department Name</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                </table>
+            <div align="right">
+                <button type="button" name="add" id="add" class="btn btn-info">Add</button>
             </div>
+            <br />
+            <div id="alert_message"></div>
+            <table id="user_data" class="table table-bordered table-striped table-responsive">
+                <thead>
+                    <tr>
+                        <th>Department ID.</th>
+                        <th>Department Name</th>
+                        <th></th>
+                    </tr>
+                </thead>
+            </table>
         </div>
-    </body>
+    </div>
+</body>
 </html>
 <script type="text/javascript">
-    $(document).ready(function(){
-       //fetch_data();
-       fetch_data();
+    $(document).ready(function () {
+        //fetch_data();
+        fetch_data();
         function fetch_data()
         {
-            
+
             var dataTable = $('#user_data').DataTable({
                 "processing": true,
                 "serverSide": true,
@@ -72,13 +73,13 @@ echo getAutoID("DepartmentID", "tb_department", "DEP", -3);
                 }
             });
         }
-       // fetch_data();
-       // // function update_data(DepartmentID, column_name, value)
-      //  {
-            
-     //   }
-        
-         $(document).on('blur', '.update', function () {
+        // fetch_data();
+        // // function update_data(DepartmentID, column_name, value)
+        //  {
+
+        //   }
+
+        $(document).on('blur', '.update', function () {
             var DepartmentID = $(this).data("id");
             var column_name = $(this).data("column");
             var value = $(this).text();
@@ -108,10 +109,10 @@ echo getAutoID("DepartmentID", "tb_department", "DEP", -3);
             html += '</tr>';
             $('#user_data tbody').prepend(html);
         });
-$(document).on('click', '#cancel', function (){
-    $('#user_data').DataTable().destroy();
-    fetch_data();
-    });
+        $(document).on('click', '#cancel', function () {
+            $('#user_data').DataTable().destroy();
+            fetch_data();
+        });
         $(document).on('click', '#insert', function () {
             var DepartmentID = $('#data1').text();
             var DepartmentName = $('#data2').text();

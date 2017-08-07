@@ -2,7 +2,7 @@
 include './classQuery.php';
 myDatabase();
 //echo ;
-$connect = mysqli_connect("localhost", "root", "", "nbs");
+include 'db.php';
 if (isset($_POST["CourseTypeID"], $_POST["CourseTypeName"])) {
     $CourseTypeID = mysqli_real_escape_string($connect, $_POST["CourseTypeID"]);
     $CourseTypeName = mysqli_real_escape_string($connect, $_POST["CourseTypeName"]);

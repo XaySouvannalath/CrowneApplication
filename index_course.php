@@ -1,3 +1,4 @@
+
 <?php
 include './classQuery.php';
 myDatabase();
@@ -39,7 +40,7 @@ $objResult = mysqli_query($connect, $sql);
         </style>
     </head>
     <body>
-        
+
         <div class="container box w3-card-4">
             <h1 align="center">Live Add Edit Delete Datatables Records of Course</h1>
             <br />
@@ -49,7 +50,7 @@ $objResult = mysqli_query($connect, $sql);
                     <button type="button" name="add" id="add" data-toggle="modal" data-target="#add_data_Modal" class="btn btn-info">Add</button>
                 </div>
                 <br />
-                <div id="alert_message"></div>
+
                 <table id="user_data" class="table table-bordered table-striped table-responsive">
                     <thead>
                         <tr>
@@ -87,30 +88,30 @@ $objResult = mysqli_query($connect, $sql);
     <div class="modal-dialog">  
         <div class="modal-content">  
             <div class="modal-header">  
+                <div id="alert_message"></div>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>  
                 <h4 class="modal-title">PHP Ajax Update MySQL Data Through Bootstrap Modal</h4>  
             </div>  
             <div class="modal-body">  
-                <form method="post" id="insert_form">  
+                <form method="post" name="insert_form" id="insert_form" enctype="multipart/form-data">  
                     <label>Auto ID. Has Been Set.</label>  
-                    <input type="text" name="courseid" id="courseid" class="form-control" />  
+                    <input type="text" name="CourseID" id="CourseID" class="form-control" readonly="true" value="<?php echo getAutoID("CourseID", "tb_course", "CSE", -3); ?>"/>  
                     <br />  
                     <label>Select Course Type</label>  
-                    <select name="coursetypeid" id="coursetypeid" class="form-control">  
-                        <?php while ($row = mysqli_fetch_array($objResult)){?>
-                        <option value="<?php echo $row[0]; ?>"><?php echo $row[1]; ?></option>  
+                    <select name="CourseTypeID" id="CourseTypeID" class="form-control">  
+                        <?php while ($row = mysqli_fetch_array($objResult)) { ?>
+                            <option value="<?php echo $row[0]; ?>"><?php echo $row[1]; ?></option>  
                         <?php } ?> 
                     </select>  
                     <br />  
                     <label>Enter Course Name</label>  
-                    <input type="text" name="coursename" id="coursename" class="form-control" />  
+                    <input type="text" name="CourseName" id="CourseName" class="form-control" />  
                     <br />  
                     <label>Enter When to train</label>  
-                    <input type="text" name="when" id="when" class="form-control" />  
+                    <input type="text" placeholder="You can leave blank on this section." name="When" id="When" class="form-control" />  
                     <br />  
                     <input type="hidden" name="course_id" id="course_id" />  
-                    <input type="submit" name="insert" id="insert" value="Insert" class="btn btn-success" />  
-                    <input type="button" id="test" value="click">
+                    <input type="submit" value="Insert"  name="insert" id="insert" class="btn btn-success insert"/>
                 </form>  
             </div>  
             <div class="modal-footer">  
@@ -125,8 +126,6 @@ $objResult = mysqli_query($connect, $sql);
             $('#insert').val("Insert");
             $('#insert_form')[0].reset();
         });
-
-        //fetch_data();
         fetch_data();
         function fetch_data()
         {
@@ -161,11 +160,74 @@ $objResult = mysqli_query($connect, $sql);
                 }, 5000);
             }
         });
-           $(document).on('click', '#test',function(){
-               var cid = $('#course_id').text();
-               alert(cid);
-           });
 
 
+        $('#insert').click(function (event) {
+            event.preventDefault();
+            var CourseID = $('#CourseID').val();
+            var CourseName = $('#CourseName').val();
+            var CourseTypeID = $('#CourseTypeID').val();
+            var When = $('#When').val();
+            //  alert(CourseName + CourseID + CourseTypeID + When);
+            if (CourseName != '')
+            {
+                $.ajax({
+                    url: "insert_course.php",
+                    method: "POST",
+                    data:
+                            {
+                                CourseID: CourseID,
+                                CourseTypeID: CourseTypeID,
+                                CourseName: CourseName,
+                                When: When
+                            },
+                    //
+                    // data:$('#insert_form').serialize(),                    
+                    beforeSend: function () {
+                        $('#insert').val("Inserting");
+                    },
+                    success: function (data)
+                    {
+                        $('#alert_message').html('<div class="alert alert-success">' + data + '</div>');
+                        $('#insert_form')[0].reset();
+                        $('#add_data_Modal').modal('hide');
+                        $('#user_data').DataTable().destroy();
+                        fetch_data();
+                    }
+                });
+                setInterval(function () {
+
+                    $('#alert_message').html('');
+                }, 5000);
+
+            }
+            else
+            {
+                //alert(CourseID + CourseTypeID);
+                alert("Course Name is required");
+            }
+        });
+
+
+        //Update
+        $(document).on('click', '.edit', function () {
+            var course_id = $(this).attr("id");
+            $.ajax({
+                url: "update_course.php",
+                method: "POST",
+                data: {course_id: course_id},
+                dataType: "json",
+                success: function (data) {
+                    $('#courseid').val(data.CourseID);
+                    $('#coursetypeid').val(data.CourseTypeID);
+                    $('#coursetypeid').text(data.CourseTypeName);
+                    $('#coursename').val(data.CourseName);
+                    $('#when').val(data.When);
+                    $('#course_id').val(data.id);
+                    $('#insert').val("Update");
+                    $('#add_data_Modal').modal('show');
+                }
+            });
+        });
     });
 </script>

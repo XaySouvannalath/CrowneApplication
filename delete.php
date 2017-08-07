@@ -1,10 +1,31 @@
-<?php
+ <?php
 
-$connect = mysqli_connect("localhost", "root", "", "testing");
-if (isset($_POST["id"])) {
-    $query = "DELETE FROM user WHERE id = '" . $_POST["id"] . "'";
-    if (mysqli_query($connect, $query)) {
-        echo 'Data Deleted';
-    }
+include('db.php');
+include("function.php");
+
+if(isset($_POST["user_id"]))
+{
+ $image = get_image_name($_POST["user_id"]);
+ if($image != '')
+ {
+  unlink("upload/" . $image);
+ }
+ $statement = $connection->prepare(
+  "DELETE FROM users WHERE id = :id"
+ );
+ $result = $statement->execute(
+  array(
+   ':id' => $_POST["user_id"]
+  )
+ );
+ 
+ if(!empty($result))
+ {
+  echo 'Data Deleted';
+ }
 }
+
+
+
 ?>
+   

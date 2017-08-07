@@ -1,60 +1,62 @@
-<?php  
- $connect = mysqli_connect("localhost", "root", "", "testing");  
- if(!empty($_POST))  
- {  
-      $output = '';  
-      $message = '';  
-      $name = mysqli_real_escape_string($connect, $_POST["name"]);  
-      $address = mysqli_real_escape_string($connect, $_POST["address"]);  
-      $gender = mysqli_real_escape_string($connect, $_POST["gender"]);  
-      $designation = mysqli_real_escape_string($connect, $_POST["designation"]);  
-      $age = mysqli_real_escape_string($connect, $_POST["age"]);  
-      if($_POST["employee_id"] != '')  
-      {  
-           $query = "  
-           UPDATE tbl_employee   
-           SET name='$name',   
-           address='$address',   
-           gender='$gender',   
-           designation = '$designation',   
-           age = '$age'   
-           WHERE id='".$_POST["employee_id"]."'";  
-           $message = 'Data Updated';  
-      }  
-      else  
-      {  
-           $query = "  
-           INSERT INTO tbl_employee(name, address, gender, designation, age)  
-           VALUES('$name', '$address', '$gender', '$designation', '$age');  
-           ";  
-           $message = 'Data Inserted';  
-      }  
-      if(mysqli_query($connect, $query))  
-      {  
-           $output .= '<label class="text-success">' . $message . '</label>';  
-           $select_query = "SELECT * FROM tbl_employee ORDER BY id DESC";  
-           $result = mysqli_query($connect, $select_query);  
-           $output .= '  
-                <table class="table table-bordered">  
-                     <tr>  
-                          <th width="70%">Employee Name</th>  
-                          <th width="15%">Edit</th>  
-                          <th width="15%">View</th>  
-                     </tr>  
-           ';  
-           while($row = mysqli_fetch_array($result))  
-           {  
-                $output .= '  
-                     <tr>  
-                          <td>' . $row["name"] . '</td>  
-                          <td><input type="button" name="edit" value="Edit" id="'.$row["id"] .'" class="btn btn-info btn-xs edit_data" /></td>  
-                          <td><input type="button" name="view" value="view" id="' . $row["id"] . '" class="btn btn-info btn-xs view_data" /></td>  
-                     </tr>  
-                ';  
-           }  
-           $output .= '</table>';  
-      }  
-      echo $output;  
- }  
- ?>
- 
+<?php
+include('db.php');
+include('function.php');
+if(isset($_POST["operation"]))
+{
+ if($_POST["operation"] == "Add")
+ {
+  $image = '';
+  if($_FILES["user_image"]["name"] != '')
+  {
+   $image = upload_image();
+  }
+  $statement = $connection->prepare("
+   INSERT INTO users (first_name, last_name, image) 
+   VALUES (:first_name, :last_name, :image)
+  ");
+  $result = $statement->execute(
+   array(
+    ':first_name' => $_POST["first_name"],
+    ':last_name' => $_POST["last_name"],
+    ':image'  => $image
+   )
+  );
+  if(!empty($result))
+  {
+   echo 'Data Inserted';
+  }
+ }
+ if($_POST["operation"] == "Edit")
+ {
+  $image = '';
+  if($_FILES["user_image"]["name"] != '')
+  {
+   $image = upload_image();
+  }
+  else
+  {
+   $image = $_POST["hidden_user_image"];
+  }
+  $statement = $connection->prepare(
+   "UPDATE users 
+   SET first_name = :first_name, last_name = :last_name, image = :image  
+   WHERE id = :id
+   "
+  );
+  $result = $statement->execute(
+   array(
+    ':first_name' => $_POST["first_name"],
+    ':last_name' => $_POST["last_name"],
+    ':image'  => $image,
+    ':id'   => $_POST["user_id"]
+   )
+  );
+  if(!empty($result))
+  {
+   echo 'Data Updated';
+  }
+ }
+}
+
+?>
+  

@@ -38,7 +38,7 @@
                 <table id="user_data" class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th width="10%">id</th>
+                            <th width="10%">Image</th>
                             <th width="35%">First Name</th>
                             <th width="35%">Last Name</th>
                             <th width="10%">Edit</th>
@@ -61,15 +61,15 @@
                     <h4 class="modal-title">Add User</h4>
                 </div>
                 <div class="modal-body">
-                    <label>Enter ID</label>
-                    <input type="text" name="first_name" id="first_name" class="form-control" />
-                    <br />
                     <label>Enter First Name</label>
                     <input type="text" name="first_name" id="first_name" class="form-control" />
                     <br />
                     <label>Enter Last Name</label>
                     <input type="text" name="last_name" id="last_name" class="form-control" />
-                    <br />                   
+                    <br />
+                    <label>Select User Image</label>
+                    <input type="file" name="user_image" id="user_image" />
+                    <span id="user_uploaded_image"></span>
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" name="user_id" id="user_id" />
@@ -89,7 +89,7 @@
             $('.modal-title').text("Add User");
             $('#action').val("Add");
             $('#operation').val("Add");
-           
+            $('#user_uploaded_image').html('');
         });
 
         var dataTable = $('#user_data').DataTable({
@@ -100,29 +100,18 @@
                 url: "fetch.php",
                 type: "POST"
             },
-                        "columnDefs": [
+            "columnDefs": [
                 {
                     "targets": [0, 3, 4],
                     "orderable": false,
                 },
             ],
-
         });
 
         $(document).on('submit', '#user_form', function (event) {
             event.preventDefault();
             var firstName = $('#first_name').val();
             var lastName = $('#last_name').val();
-            var extension = $('#user_image').val().split('.').pop().toLowerCase();
-            if (extension != '')
-            {
-                if (jQuery.inArray(extension, ['gif', 'png', 'jpg', 'jpeg']) == -1)
-                {
-                    alert("Invalid Image File");
-                    $('#user_image').val('');
-                    return false;
-                }
-            }
             if (firstName != '' && lastName != '')
             {
                 $.ajax({
@@ -187,5 +176,7 @@
                 return false;
             }
         });
+
+
     });
 </script>

@@ -124,6 +124,7 @@ myDatabase();
                     url: "insert_banding.php",
                     method: "POST",
                     data: {BandingID: BandingID, BandingNo: BandingNo, BandingDescription: BandingDescription},
+                   
                     success: function (data)
                     {
                         $('#alert_message').html('<div class="alert alert-success">' + data + '</div>');
