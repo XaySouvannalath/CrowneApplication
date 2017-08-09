@@ -1,5 +1,5 @@
 <?php
-include 'db.';
+include 'db.php';
 if (isset($_POST["CourseID"], $_POST["CourseTypeID"], $_POST["CourseName"], $_POST["WhenTrain"])) {
 
      $CourseID = mysqli_real_escape_string($connect, $_POST["CourseID"]);  
