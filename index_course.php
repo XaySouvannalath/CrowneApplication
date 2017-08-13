@@ -124,7 +124,7 @@ $objResult = mysqli_query($connect, $sql);
 <script type="text/javascript">
     $(document).ready(function () {
         $('#add').click(function () {
-            var newid = '<?php echo getAutoID("CourseID", "tb_course", "CSE", -3); ?>';
+            var newid = "<?php echo getAutoID("CourseID", "tb_course", "CSE", -3); ?>";
             $('#insert').val("Insert");
             $('#insert_form')[0].reset();
             $('#CourseID').val(newid);
@@ -166,14 +166,13 @@ $objResult = mysqli_query($connect, $sql);
 
 
        $('#insert').click(function(event){
-
-           
-            var CourseID = $('#CourseID').val();
+            if ($('#insert').val()=='Insert') {
+                            var CourseID = $('#CourseID').val();
             var CourseName = $('#CourseName').val();
             var CourseTypeID = $('#CourseTypeID').val();
             var WhenTrain = $('#WhenTrain').val();
           //  alert(CourseName + CourseID + CourseTypeID + WhenTrain);
-          alert(CourseID);
+         // alert(CourseID);
             if (CourseName != '')
             {
                 $.ajax({
@@ -205,6 +204,29 @@ $objResult = mysqli_query($connect, $sql);
                
                 alert("Course Name is required");
             }
+            else if($('#insert').val()=="Update")
+            {
+                var position_id = $(this).attr("id");
+                var PositionID = $('#PositionID').val();
+                var DepartmentID = $('#DepartmentID').val();
+                var PositionName = $('#PositionName').val();
+                var BandingID = $('#BandingID').val();
+              //  alert('this is update');
+                $.ajax({
+                url: "update_position.php",
+                method: "POST",
+                data: {PositionID: PositionID, DepartmentID: DepartmentID, PositionName: PositionName,BandingID: BandingID},
+                success: function (data)
+                {
+
+                    $('#alert_message').html('<div class="alert alert-success">' + data + '</div>');
+                     $('#add_data_Modal').modal('hide');
+                      $('#insert_form')[0].reset();
+                    $('#user_data').DataTable().destroy();
+                   fetch_data();
+                }
+            }
+
         });
 
 

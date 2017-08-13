@@ -1,11 +1,26 @@
- <?php  
- //fetch.php  
+<?php
 include 'db.php';
- if(isset($_POST["course_id"]))  
- {  
-      $query = "SELECT * FROM tb_course WHERE CourseID = '".$_POST["course_id"]."'";  
-      $result = mysqli_query($connect, $query);  
-      $row = mysqli_fetch_array($result);  
-      echo json_encode($row);  
- }  
- ?>
+ 
+      $output = '';  
+      $message = '';  
+      $CourseID = mysqli_real_escape_string($connect, $_POST["CourseID"]);  
+      $CourseTypeID = mysqli_real_escape_string($connect, $_POST["CourseTypeID"]);  
+      $CourseName = mysqli_real_escape_string($connect, $_POST["CourseName"]);  
+      $WhenTrain = mysqli_real_escape_string($connect, $_POST["WhenTrain"]); 
+           $query = "  
+           UPDATE tb_course   
+           SET CourseTypeID='$CourseTypeID',   
+           CourseName='$CourseName',   
+           WhenTrain = '$WhenTrain'        
+           WHERE PositionID='".$_POST["CourseID"]."'";  
+        if(mysqli_query($connect,$query)){
+            echo 'Data Updated';
+           // echo $query;
+        }
+        else
+        {
+            echo 'fail to update';
+           // echo $query;
+        }
+
+?>

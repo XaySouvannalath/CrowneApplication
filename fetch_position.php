@@ -39,7 +39,6 @@ while ($row = mysqli_fetch_array($result)) {
     $sub_array[] = '<div  class="update" data-id="' . $row["PositionID"] . '" data-column="CourseName">' . $row["DepartmentName"] . '</div>';
     $sub_array[] = '<div  class="update" data-id="' . $row["PositionID"] . '" data-column="CourseName">' . $row["PositionName"] . '</div>';
     $sub_array[] = '<div  class="update" data-id="' . $row["PositionID"] . '" data-column="CourseName">' . $row["BandingNo"] . '</div>';
-
     $sub_array[] = '<button type="button" name="edit" class="btn btn-success btn-xs edit" data-toggle="modal" data-target="#add_data_Modal" id="' . $row["PositionID"] . '">Edit</button>';
     $sub_array[] = '<button type="button" name="delete" class="btn btn-danger btn-xs delete" id="' . $row["PositionID"] . '">Delete</button>';
     $data[] = $sub_array;
