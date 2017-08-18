@@ -3,11 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/CrowneApplication/index_coursetype.php</file>
-            <file>file:/C:/xampp/htdocs/CrowneApplication/index_position.php</file>
+            <file>file:/C:/xampp/htdocs/CrowneApplication/fetch_training.php</file>
+            <file>file:/C:/xampp/htdocs/CrowneApplication/test.php</file>
             <file>file:/C:/xampp/htdocs/CrowneApplication/index_course.php</file>
-            <file>file:/C:/xampp/htdocs/CrowneApplication/index_banding.php</file>
-            <file>file:/C:/xampp/htdocs/CrowneApplication/index_department.php</file>
+            <file>file:/C:/xampp/htdocs/CrowneApplication/index_training.php</file>
+            <file>file:/C:/xampp/htdocs/CrowneApplication/test1.php</file>
+            <file>file:/C:/xampp/htdocs/CrowneApplication/insert.php</file>
+            <file>file:/C:/xampp/htdocs/CrowneApplication/fetch.php</file>
+            <file>file:/C:/xampp/htdocs/CrowneApplication/delete_training.php</file>
         </group>
     </open-files>
 </project-private>

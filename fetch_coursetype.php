@@ -34,9 +34,9 @@ $data = array();
 
 while ($row = mysqli_fetch_array($result)) {
     $sub_array = array();
-    $sub_array[] = '<div contenteditable class="update" data-id="' . $row["CourseTypeID"] . '" data-column="CourseTypeName">' . $row["CourseTypeID"] . '</div>';
-    $sub_array[] = '<div contenteditable class="update" data-id="' . $row["CourseTypeID"] . '" data-column="CourseTypeName">' . $row["CourseTypeName"] . '</div>';
-    $sub_array[] = '<button type="button" name="delete" class="btn btn-danger btn-xs delete" id="' . $row["CourseTypeID"] . '">Delete</button>';
+    $sub_array[] = '<div contenteditable id="whitefont" class="update" data-id="' . $row["CourseTypeID"] . '" data-column="CourseTypeName">' . $row["CourseTypeID"] . '</div>';
+    $sub_array[] = '<div contenteditable id="whitefont" class="update" data-id="' . $row["CourseTypeID"] . '" data-column="CourseTypeName">' . $row["CourseTypeName"] . '</div>';
+    $sub_array[] = '<button type="button"   name="delete" class="btn btn-danger btn-xs delete" id="' . $row["CourseTypeID"] . '">Delete</button>';
     $data[] = $sub_array;
 }
 

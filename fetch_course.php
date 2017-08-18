@@ -35,11 +35,11 @@ $data = array();
 
 while ($row = mysqli_fetch_array($result)) {
     $sub_array = array();
-    $sub_array[] = '<div  class="update" data-id="' . $row["CourseID"] . '" data-column="CourseName">' . $row["CourseID"] . '</div>';
-    $sub_array[] = '<div  class="update" data-id="' . $row["CourseID"] . '" data-column="CourseName">' . $row["CourseTypeName"] . '</div>';
-    $sub_array[] = '<div  class="update" data-id="' . $row["CourseID"] . '" data-column="CourseName">' . $row["CourseName"] . '</div>';
-    $sub_array[] = '<div  class="update" data-id="' . $row["CourseID"] . '" data-column="CourseName">' . $row["WhenTrain"] . '</div>';
-    $sub_array[] = '<button type="button" name="view" class="btn btn-info btn-xs view" id="' . $row["CourseID"] . '">View</button>';
+    $sub_array[] = '<div  class="update" id="whitefont" data-id="' . $row["CourseID"] . '" data-column="CourseName">' . $row["CourseID"] . '</div>';
+    $sub_array[] = '<div  class="update" id="whitefont" data-id="' . $row["CourseID"] . '" data-column="CourseName">' . $row["CourseTypeName"] . '</div>';
+    $sub_array[] = '<div  class="update" id="whitefont" data-id="' . $row["CourseID"] . '" data-column="CourseName">' . $row["CourseName"] . '</div>';
+    $sub_array[] = '<div  class="update" id="whitefont" data-id="' . $row["CourseID"] . '" data-column="CourseName">' . $row["WhenTrain"] . '</div>';
+ 
     $sub_array[] = '<button type="button" name="edit" class="btn btn-success btn-xs edit" data-toggle="modal" data-target="#add_data_Modal" id="' . $row["CourseID"] . '">Edit</button>';
     $sub_array[] = '<button type="button" name="delete" class="btn btn-danger btn-xs delete" id="' . $row["CourseID"] . '">Delete</button>';
     $data[] = $sub_array;

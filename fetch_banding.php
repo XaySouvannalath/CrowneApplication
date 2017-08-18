@@ -36,9 +36,9 @@ $data = array();
 
 while ($row = mysqli_fetch_array($result)) {
     $sub_array = array();
-    $sub_array[] = '<div contenteditable class="update" data-id="' . $row["BandingID"] . '" data-column="BandingID">' . $row["BandingID"] . '</div>';
-    $sub_array[] = '<div contenteditable class="update" data-id="' . $row["BandingID"] . '" data-column="BandingNo">' . $row["BandingNo"] . '</div>';
-    $sub_array[] = '<div contenteditable class="update" data-id="' . $row["BandingID"] . '" data-column="BandingDescription">' . $row["BandingDescription"] . '</div>';
+    $sub_array[] = '<div id="whitefont" contenteditable class="update" data-id="' . $row["BandingID"] . '" data-column="BandingID">' . $row["BandingID"] . '</div>';
+    $sub_array[] = '<div id="whitefont"  contenteditable class="update" data-id="' . $row["BandingID"] . '" data-column="BandingNo">' . $row["BandingNo"] . '</div>';
+    $sub_array[] = '<div id="whitefont"  contenteditable class="update" data-id="' . $row["BandingID"] . '" data-column="BandingDescription">' . $row["BandingDescription"] . '</div>';
     $sub_array[] = '<button type="button" name="delete" class="btn btn-danger btn-xs delete" id="' . $row["BandingID"] . '">Delete</button>';
     $data[] = $sub_array;
 }
